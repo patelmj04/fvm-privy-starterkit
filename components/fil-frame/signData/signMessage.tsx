@@ -3,11 +3,17 @@
 import { shorten } from "../lib/utils";
 import { useAccount, useSignMessage, useSignTypedData } from "wagmi";
 import { usePrivy } from "@privy-io/react-auth";
+import Card from "../card/card";
 
 const SignData = () => {
   const { user } = usePrivy();
   const { address, chain } = useAccount();
-  const { data, isPending, isSuccess, isError, signMessage } = useSignMessage({
+  const {
+    data: signMessageData,
+    isPending: signMessageIsPending,
+    isSuccess,
+    signMessage,
+  } = useSignMessage({
     mutation: {
       onSuccess: () => {
         console.log("Sign Message Success");
@@ -16,7 +22,11 @@ const SignData = () => {
   });
 
   // Sign Typed Data Var Init
-  const { signTypedData } = useSignTypedData();
+  const {
+    data: signTypedMessageData,
+    isPending: signTypedMessageIsPending,
+    signTypedData,
+  } = useSignTypedData();
 
   // All properties on a domain are optional
   const domain = {
@@ -53,38 +63,42 @@ const SignData = () => {
 
   return (
     <>
-      <h2 className="mt-6 text-2xl">useSignMessage</h2>
-      <button
-        disabled={isPending}
-        onClick={() => {
-          signMessage({
-            message: `Signing with WAGMI\nWAGMI address: ${shorten(
-              address
-            )}\nPrivy address: ${shorten(user?.wallet?.address)}`,
-          });
-        }}
-      >
-        Sign Message
-      </button>
-      {isSuccess && <div>Signature: {shorten(data)}</div>}
-      {isError && <div>Error signing message</div>}
+      <div className="flex flex-col justify-center gap-8">
+        <Card
+          heading="useSignMessage"
+          cta={
+            isSuccess
+              ? `Signature: ${shorten(signMessageData)}`
+              : `Sign Message`
+          }
+          onClick_={() => {
+            signMessage({
+              message: `Signing with WAGMI\nWAGMI address: ${shorten(
+                address
+              )}\nPrivy address: ${shorten(user?.wallet?.address)}`,
+            });
+          }}
+          disabled={signMessageIsPending}
+        />
 
-      <h2 className="mt-6 text-2xl">useSignTypedMessage</h2>
-      <button
-        disabled={isPending}
-        onClick={() => {
-          signTypedData({
-            primaryType: "Mail",
-            domain,
-            types,
-            message,
-          });
-        }}
-      >
-        Sign typed data
-      </button>
-      {isSuccess && <div>Signature: {shorten(data)}</div>}
-      {isError && <div>Error signing message</div>}
+        <Card
+          heading="useSignTypedMessage"
+          cta={
+            isSuccess
+              ? `Signature: ${shorten(signTypedMessageData)}`
+              : `Sign typed data`
+          }
+          onClick_={() => {
+            signTypedData({
+              primaryType: "Mail",
+              domain,
+              types,
+              message,
+            });
+          }}
+          disabled={signTypedMessageIsPending}
+        />
+      </div>
     </>
   );
 };

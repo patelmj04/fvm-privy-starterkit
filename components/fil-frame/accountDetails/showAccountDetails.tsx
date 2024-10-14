@@ -23,18 +23,20 @@ const AccountDetails: React.FC = () => {
   } = useSendTransaction();
   return (
     <>
-      <div className="flex flex-row justify-center gap-8">
-        <Card
-          heading="FIL BALANCE"
-          cta={`${addressData?.formatted.slice(0, 10)} ${addressData?.symbol}`}
-        />
-        <Card
-          heading="SEND FIL"
-          cta="SEND 0.001 FIL"
-          onClick_={() => sendTransaction(transactionRequest)}
-          disabled={!sendTransaction}
-        />
-      </div>
+        <div className="flex flex-col justify-center gap-8 lg:flex-row">
+          <Card
+            heading="FIL BALANCE"
+            cta={`${addressData?.formatted.slice(0, 10)} ${
+              addressData?.symbol
+            }`}
+          />
+          <Card
+            heading="SEND FIL"
+            cta="SEND 0.001 FIL"
+            onClick_={() => sendTransaction(transactionRequest)}
+            disabled={!sendTransaction}
+          />
+        </div>
     </>
   );
 };

@@ -43,6 +43,11 @@ const Header = () => {
               DeFi
             </div>
           </Link>
+          <Link href="/sign">
+            <div className="text-white font-bold">
+              Sign
+            </div>
+          </Link>
           <Link href="/dummy">
             <div className="text-white font-bold">
               Dummy

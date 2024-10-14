@@ -2,7 +2,7 @@
 
 import Card from "../card/card";
 import { CONTRACT_ABI, CONTRACT_ADDRESS } from "./contractDetails";
-import { useReadContract } from "wagmi";
+import { useReadContract, useWriteContract } from "wagmi";
 
 interface ContractProps {
   account: `0x${string}`;
@@ -29,9 +29,23 @@ const ContractIntegration: React.FC<ContractProps> = ({ account, balance }) => {
     functionName: "decimals",
   });
 
+  const { writeContract } = useWriteContract()
+
+  // onClick={() => 
+  //   writeContract({ 
+  //     CONTRACT_ABI,
+  //     address: CONTRACT_ADDRESS,
+  //     functionName: 'transferFrom',
+  //     args: [
+  //       '0xd2135CfB216b74109775236E36d4b433F1DF507B',
+  //       '0xA0Cf798816D4b9b9866b5330EEa46a18382f251e',
+  //       123n,
+  //     ],
+  //  })
+  // }
   return (
     <>
-      <div className="flex flex-row justify-center gap-8">
+      <div className="flex flex-col lg:flex-row justify-center gap-8">
         <Card
           heading="TOKEN BALANCE"
           cta={`${(

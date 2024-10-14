@@ -11,7 +11,7 @@ const Card = ({ heading, cta, onClick_, disabled }: cardProps) => {
   if (disabled) {
   }
   return (
-    <div className="flex flex-col border-2 border-black overflow-hidden p-8 rounded-xl shadow-large bg-yellow-300 w-[500px]">
+    <div className="flex flex-col border-2 border-black overflow-hidden p-8 rounded-xl shadow-large bg-yellow-300 w-full lg:w-[500px]">
       <div className="px-2 py-8 sm:p-10 sm:pb-6">
         <div className="items-center w-full justify-center grid grid-cols-1 text-center">
           <div>
