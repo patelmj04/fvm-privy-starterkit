@@ -31,18 +31,6 @@ const ContractIntegration: React.FC<ContractProps> = ({ account, balance }) => {
 
   const { writeContract } = useWriteContract()
 
-  // onClick={() => 
-  //   writeContract({ 
-  //     CONTRACT_ABI,
-  //     address: CONTRACT_ADDRESS,
-  //     functionName: 'transferFrom',
-  //     args: [
-  //       '0xd2135CfB216b74109775236E36d4b433F1DF507B',
-  //       '0xA0Cf798816D4b9b9866b5330EEa46a18382f251e',
-  //       123n,
-  //     ],
-  //  })
-  // }
   return (
     <>
       <div className="flex flex-col lg:flex-row justify-center gap-8">
@@ -53,7 +41,17 @@ const ContractIntegration: React.FC<ContractProps> = ({ account, balance }) => {
             10 ** Number(decimals.data)
           )?.toString()} ${tokenName.data?.toString()}`}
         />
-        <Card heading="MINT TOKEN" cta={`Mint 100 Tokens`} />
+        <Card heading="MINT TOKEN"  onClick_={() => 
+              writeContract({ 
+                abi: CONTRACT_ABI,
+                address: CONTRACT_ADDRESS,
+                functionName: 'mint',
+                args: [
+                  account,
+                  BigInt(100000000000000000000)
+                ],
+             })
+        } cta={`Mint 100 Tokens`} />
       </div>
     </>
   );
