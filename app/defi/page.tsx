@@ -79,14 +79,20 @@ export default function Defi() {
                       >
                         <button>Open Filecoin Calibration Faucet</button>
                       </a>
-                      
+
                     </div>
                     <div className="flex justify-center">
-                    <h2 className="text-black text-sm">
-                      Refresh once the funds are received
-                    </h2>
+                      <a href={`https://calibration.filfox.info/en/address/${displayText}`}>
+                        <h2 className="text-black text-sm">
+                          View Account On Explorer
+                        </h2>
+                      </a>
+
+                      <h2 className="text-black text-sm">
+                        Refresh once the funds are received
+                      </h2>
                     </div>
-                  
+
                   </div>
                 </div>
               </>
