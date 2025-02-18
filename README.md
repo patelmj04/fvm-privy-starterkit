@@ -13,6 +13,7 @@ Update the env: [OPTIONAL]
 You can get the credentials from here : https://cloud.walletconnect.com/sign-in
 
 ```bash
+
 NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID=""
 ```
 
